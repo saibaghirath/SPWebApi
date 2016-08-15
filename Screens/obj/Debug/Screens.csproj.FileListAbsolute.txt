@@ -1,0 +1,5 @@
+C:\Users\adukiab\Desktop\Training\vsTraining\SPWebApi\Screens\bin\Screens.dll
+C:\Users\adukiab\Desktop\Training\vsTraining\SPWebApi\Screens\bin\Screens.pdb
+C:\Users\adukiab\Desktop\Training\vsTraining\SPWebApi\Screens\obj\Debug\Screens.csprojResolveAssemblyReference.cache
+C:\Users\adukiab\Desktop\Training\vsTraining\SPWebApi\Screens\obj\Debug\Screens.dll
+C:\Users\adukiab\Desktop\Training\vsTraining\SPWebApi\Screens\obj\Debug\Screens.pdb

@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Database1Entities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Appointments" EntityType="Database1Model.Appointment" />
+    <EntitySet Name="Categories" EntityType="Database1Model.Category" />
+    <EntitySet Name="ServiceProviders" EntityType="Database1Model.ServiceProvider" />
+    <EntitySet Name="Services" EntityType="Database1Model.Service" />
+    <EntitySet Name="SPS" EntityType="Database1Model.SP" />
+    <EntitySet Name="UserDetails" EntityType="Database1Model.UserDetail" />
+    <EntitySet Name="UserMs" EntityType="Database1Model.UserM" />
+    <AssociationSet Name="sid" Association="Database1Model.sid">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="sp_id" Association="Database1Model.sp_id">
+      <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="userid" Association="Database1Model.userid">
+      <End Role="UserM" EntitySet="UserMs" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="cid" Association="Database1Model.cid">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Services" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="u_id" Association="Database1Model.u_id">
+      <End Role="UserM" EntitySet="UserMs" />
+      <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+    </AssociationSet>
+    <AssociationSet Name="uid" Association="Database1Model.uid">
+      <End Role="UserM" EntitySet="UserMs" />
+      <End Role="UserDetail" EntitySet="UserDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="aid" />
+    </Key>
+    <Property Name="aid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="datetime" Type="DateTime" Precision="3" />
+    <Property Name="phoneno" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="status" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="sid" Type="Int32" Nullable="false" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="sp_id" Type="Int32" />
+    <NavigationProperty Name="Service" Relationship="Database1Model.sid" FromRole="Appointment" ToRole="Services" />
+    <NavigationProperty Name="ServiceProvider" Relationship="Database1Model.sp_id" FromRole="Appointment" ToRole="ServiceProvider" />
+    <NavigationProperty Name="UserM" Relationship="Database1Model.userid" FromRole="Appointment" ToRole="UserM" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="cid" />
+    </Key>
+    <Property Name="cid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="description" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="createdBy" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="createdDate" Type="DateTime" Precision="0" />
+    <Property Name="cimage" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Services" Relationship="Database1Model.cid" FromRole="Category" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="ServiceProvider">
+    <Key>
+      <PropertyRef Name="spid" />
+    </Key>
+    <Property Name="spid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="u_id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="location" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="companyName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="address" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="phoneno" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="faxNo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="panNo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="adhaarNo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="referredBy" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="customerPan" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="sp_image" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="serviceCategory" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Appointments" Relationship="Database1Model.sp_id" FromRole="ServiceProvider" ToRole="Appointment" />
+    <NavigationProperty Name="UserM" Relationship="Database1Model.u_id" FromRole="ServiceProvider" ToRole="UserM" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="cid" Type="Int32" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="description" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="service_image" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="min_cost" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="pinCode" Type="Int32" />
+    <NavigationProperty Name="Appointments" Relationship="Database1Model.sid" FromRole="Services" ToRole="Appointment" />
+    <NavigationProperty Name="Category" Relationship="Database1Model.cid" FromRole="Services" ToRole="Category" />
+  </EntityType>
+  <EntityType Name="SP">
+    <Key>
+      <PropertyRef Name="spid" />
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="spid" Type="Int32" Nullable="false" />
+    <Property Name="sid" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="phoneno" />
+    </Key>
+    <Property Name="phoneno" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="uid" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="address" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="panNo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="companyName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="pinCode" Type="Int32" />
+    <NavigationProperty Name="UserM" Relationship="Database1Model.uid" FromRole="UserDetail" ToRole="UserM" />
+  </EntityType>
+  <EntityType Name="UserM">
+    <Key>
+      <PropertyRef Name="uid" />
+    </Key>
+    <Property Name="uid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="role" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Appointments" Relationship="Database1Model.userid" FromRole="UserM" ToRole="Appointment" />
+    <NavigationProperty Name="ServiceProviders" Relationship="Database1Model.u_id" FromRole="UserM" ToRole="ServiceProvider" />
+    <NavigationProperty Name="UserDetails" Relationship="Database1Model.uid" FromRole="UserM" ToRole="UserDetail" />
+  </EntityType>
+  <Association Name="sid">
+    <End Role="Services" Type="Database1Model.Service" Multiplicity="1" />
+    <End Role="Appointment" Type="Database1Model.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="sp_id">
+    <End Role="ServiceProvider" Type="Database1Model.ServiceProvider" Multiplicity="0..1" />
+    <End Role="Appointment" Type="Database1Model.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceProvider">
+        <PropertyRef Name="spid" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="sp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="userid">
+    <End Role="UserM" Type="Database1Model.UserM" Multiplicity="0..1" />
+    <End Role="Appointment" Type="Database1Model.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserM">
+        <PropertyRef Name="uid" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="cid">
+    <End Role="Category" Type="Database1Model.Category" Multiplicity="1" />
+    <End Role="Services" Type="Database1Model.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="cid" />
+      </Principal>
+      <Dependent Role="Services">
+        <PropertyRef Name="cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="u_id">
+    <End Role="UserM" Type="Database1Model.UserM" Multiplicity="1" />
+    <End Role="ServiceProvider" Type="Database1Model.ServiceProvider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserM">
+        <PropertyRef Name="uid" />
+      </Principal>
+      <Dependent Role="ServiceProvider">
+        <PropertyRef Name="u_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="uid">
+    <End Role="UserM" Type="Database1Model.UserM" Multiplicity="0..1" />
+    <End Role="UserDetail" Type="Database1Model.UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserM">
+        <PropertyRef Name="uid" />
+      </Principal>
+      <Dependent Role="UserDetail">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

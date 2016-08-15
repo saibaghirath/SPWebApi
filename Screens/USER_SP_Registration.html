@@ -1,0 +1,170 @@
+﻿<html>
+<head>
+    <title></title>
+    <script src="Scripts/angular.js"></script>
+    <script src="check.js"></script>
+    <script src="validate.js"></script>
+    <link href="StyleSheet2.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+   <script>
+       function select() {
+           var x = document.getElementById('s1').value;
+           if (x == "serviceprovider") {
+               document.getElementById('d1').className = "d";
+           }
+           else {
+               document.getElementById('d1').className = "hidden";
+           }
+       }
+       function customerdisp() {
+           var x = document.getElementById('Radio2').value;
+
+           if (x == "customer") {
+               document.getElementById('d2').className = "d";
+
+           }
+
+       }
+       function customer() {
+           var y = document.getElementById('Radio1').value;
+           if (y == "self") {
+               document.getElementById('d2').className = "hidden";
+           }
+       }
+   </script>
+ 
+    <style>
+         #Span1,#errorname,#Span2,#Span3,#Span4,#Span9,#Span6,#Span7,#Span8,#Span10 {
+            color:red;
+            float:right;
+        }
+               .btn{
+color:#009688;
+width:50px;
+
+}
+               .label{
+  color:#AAA173;
+  float:right;
+  font-size:medium;
+}
+               .ques{
+  color:#00897B;
+  font-size:25px;
+}
+        .hidden {
+            display:none;
+        }
+        .d {
+            display:block;
+        }
+    </style>
+    </head>
+<body ng-app="m1">
+    <div ng-controller="add">
+    <form ng-submit="Add()">
+<div class="login-form">
+    
+     <h1> User Registration</h1>
+     <div class="form-group ">
+       <label class="ques">Enter username</label><input type="text" class="form-control" placeholder="Entername " onblur="checkName(this.value)" ng-model="user.name"><span id="errorname"></span>
+       <i class="fa fa-user"></i>
+     </div>
+    <div class="form-group ">
+       <label class="ques">Enter Password</label><input type="password" class="form-control" placeholder="Enter password " onblur="checkPwd(this.value)" ng-model="user.password"><span id="Span1"></span>
+       <i class="fa fa-user"></i>
+     </div>
+      <div class="form-group log-status">
+          <label class="ques">Phone Number</label><input type="text" maxlength="10" class="form-control" placeholder="Enter Phone no." onblur="checkNum(this.value)" id="Text3" ng-model="userd.phoneno"><span id="Span2"></span>
+       <i class="fa fa-lock"></i>
+     </div>
+         <div class="form-group log-status">
+          <label class="ques">Address</label><input type="text" class="form-control" placeholder="Enter Address" onblur="checkAddress(this.value)" id="Text2" ng-model="userd.address"><span id="Span3"></span>
+       <i class="fa fa-lock"></i>
+     </div>
+  <div class="form-group log-status">
+          <label class="ques">Pin Code</label><input type="text" maxlength="6" onblur="checkPin(this.value)" placeholder="Enter Pin Code" class="form-control" id="Text1" ng-model="userd.pinCode"><span id="Span4"></span>
+       <i class="fa fa-lock"></i>
+     </div>
+      <div class="form-group log-status">
+          <label class="ques">Email</label><input type="text" class="form-control" onblur="checkEmail(this.value)" id="Text4" placeholder="Enter Email" ng-model="userd.email"><span id="Span6"></span>
+       <i class="fa fa-lock"></i>
+     </div>
+       <div class="form-group log-status">
+          <label class="ques">Pan number</label><input type="text" class="form-control" onblur="checkPan(this.value)"  placeholder="Enter Pan no." maxlength="10" id="Text6" ng-model="userd.panNo"><span id="Span7"></span>
+       <i class="fa fa-lock"></i>
+     </div>
+       <div class="form-group log-status">
+          <label class="ques">Company name</label><input type="text" class="form-control" onblur="checkComp(this.value)" placeholder="Enter Company Name" id="Text7" ng-model="userd.companyName"><span id="Span8"></span>
+       <i class="fa fa-lock"></i>
+     </div>
+    
+        <div class="form-group log-status">
+         <label class="ques" >Role</label>
+         <select class="form-control" required ng-model="user.role" id="s1" onchange="select()">
+             <option style="font-size:15px" value="serviceprovider">SERVICE PROVIDER</option>
+             <option style="font-size:15px" value="customer">CUSTOMER</option>
+         </select>
+       <i class="fa fa-lock"></i>
+    </div>
+    <div class="hidden" id="d1">
+          <div class="form-group log-status" ng-controller="CategoryCtrl">
+         <label class="ques">Select service Category</label>
+         <select class="form-control" ng-model="sp.serviceCategory" ng-change="GetCats()">
+             <!--<option style="font-size:15px">ELECTRICIAN</option>-->
+             <option ng-repeat="x in cattitle track by $index">{{x}} </option>
+
+         </select>
+       <i class="fa fa-lock"></i>
+     </div>
+         <div class="form-group log-status" <!--ng-controller="locationCtrl"-->>
+         <label class="ques">Select location</label>
+         <select class="form-control" ng-mode="sp.location" <!--ng-change="Getlocation()"-->>
+             <option style="font-size:15px">AMEERPET</option>
+             <option style="font-size:15px">AMBERPET</option>
+             <option style="font-size:15px">ASHOK NAGAR</option>
+             <option style="font-size:15px">BANJARA HILLS</option>
+             <option style="font-size:15px">BARKATPURA</option>
+             <option style="font-size:15px">BEGUMPET</option>
+             <option style="font-size:15px">FATEHNAGAR</option>
+             <option style="font-size:15px">GACHIBOWLI</option>
+             <option style="font-size:15px">HIMAYAT NAGAR</option>
+             <option style="font-size:15px">NALLAKUNTA</option>
+             <option style="font-size:15px">UPPAL</option>
+             <!--<option ng-repeat="x in location track by $index">{{x}} </option>-->
+         </select>
+       <i class="fa fa-lock"></i>
+    </div>
+    <div class="form-group log-status">
+          <label class="ques">Fax Number</label><input type="text" onblur="checkFax(this.value)" placeholder="Enter Fax no" class="form-control" id="Text8" ng-model="sp.faxNo"><span id="Span9"></span>
+       <i class="fa fa-lock"></i>
+     </div>
+       <div class="form-group log-status">
+          <label class="ques">Aadhar number</label><input type="text" class="form-control" id="Text9" onblur="checkAdhaar(this.value)" placeholder="Enter Aadhar no." ng-model="sp.adhaarNo"><span id="Span10"></span>
+       <i class="fa fa-lock"></i>
+     </div>
+       <div class="form-group log-status">
+          <label class="ques">Refered by:</label><input type="radio" value="self" id="Radio1" name="radio" onclick="customer()" ng-model="sp.referredBy"><label>Self</label>
+           <input type="radio" id="Radio2" onclick="customerdisp()" value="customer" name="radio" ng-model="sp.referredBy"><label>Customer</label>
+       <i class="fa fa-lock"></i>
+     </div>
+        <div class="hidden" id="d2">
+           <div class="form-group log-status">
+          <label class="ques">customer Pan Number</label><input type="text" class="form-control" id="Text10" ng-model="sp.customerPan"> 
+       <i class="fa fa-lock"></i>
+     </div>
+            </div>
+    </div>
+      <span class="alert">Invalid Credentials</span>
+     <input type="submit" value="register" class="log-btn" />
+     
+    
+   </div>
+
+
+<script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        </form>
+        </div>
+    </body>
+    </html>

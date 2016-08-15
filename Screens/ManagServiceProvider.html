@@ -1,0 +1,59 @@
+﻿<body>
+    <h2 style="text-align:center">Request</h2>
+<form >
+     <table ng-controller="editCtrl">   
+         <tr>
+             <th class="auto-style1">Id:</th>
+             <th class="auto-style4">Uid</th>
+             <th>   Name: </th>
+             <th>Location:</th>
+             <th>Company Name</th>
+             <th class="auto-style2">Address:</th>
+             <th>PhoneNo:</th>
+             <th>State:</th>
+             <th>FaxNo:</th>
+             <th>PanNo:</th>
+             <th>AdhaarNo:</th>
+             <th>Referred By:</th>
+             <th>Customer Pan:</th>
+             <th>Image Upload:</th>
+             <th>Service Category:</th>
+           
+         </tr>
+     <tr>
+          <td>  <input type="text" ng-model="DealerDetail.spid" class="form-control" /></td>
+       <td><input type="submit" class="btn btn-success" name="s1" value="Find" ng-click="Find()"  /></td></tr>
+          <td><input type="text" ng-model="DealerDetail.uid" class="form-control" /></td>
+       
+           <td class="auto-style1"> <input type="text" ng-model="DealerDetail.name" class="form-control"  /></td>
+         
+             <td class="auto-style1"> <input type="text" ng-model="DealerDetail.location" class="form-control" /></td>
+         <td class="auto-style1"><input type="text" ng-model="DealerDetail.companyName" class="form-control" /></td>
+          
+              <td class="auto-style1"> <input type="text" ng-model="DealerDetail.Address" class="form-control"/></td>
+       
+              <td class="auto-style1"> <input type="text" ng-model="DealerDetail.phoneNo" class="form-control" /></td>
+         
+              <td class="auto-style1"> <input type="text" ng-model="DealerDetail.email" class="form-control"  /></td>
+         
+              <td class="auto-style1"> <input type="text" ng-model="DealerDetail.faxNo" class="form-control" /></td>
+        
+              <td class="auto-style1"> <input type="text" ng-model="DealerDetail.panNo" class="form-control"  /></td>
+        
+              <td class="auto-style1"> <input type="text" ng-model="DealerDetail.adhaarNo" class="form-control" /></td>
+        
+              <td class="auto-style1"> <input type="text" ng-model="DealerDetail.referredBy" class="form-control" /></td>
+              <td class="auto-style1"> <input type="text" ng-model="DealerDetail.customerPan" class="form-control"/></td>
+         
+              <td class="auto-style1"> <input type="text" ng-model="DealerDetail.sp_image" class="form-control" /></td>
+           
+              <td> <input type="text" ng-model="DealerDetail.serviceCategory" class="form-control" /></td>
+   
+             
+             
+        <td><input type="submit" class="btn btn-success" name="s1" value="Edit" ng-click="DealerDetail.UpdateDealer()"  /></td></tr>
+    </table>
+          </form>
+
+</body>
+

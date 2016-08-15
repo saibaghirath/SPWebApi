@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Appointment" EntityType="Database1Model.Store.Appointment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Category" EntityType="Database1Model.Store.Category" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ServiceProvider" EntityType="Database1Model.Store.ServiceProvider" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Services" EntityType="Database1Model.Store.Services" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SPS" EntityType="Database1Model.Store.SPS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserDetail" EntityType="Database1Model.Store.UserDetail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserM" EntityType="Database1Model.Store.UserM" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="cid" Association="Database1Model.Store.cid">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Services" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="sid" Association="Database1Model.Store.sid">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="sp_id" Association="Database1Model.Store.sp_id">
+      <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="u_id" Association="Database1Model.Store.u_id">
+      <End Role="UserM" EntitySet="UserM" />
+      <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+    </AssociationSet>
+    <AssociationSet Name="uid" Association="Database1Model.Store.uid">
+      <End Role="UserM" EntitySet="UserM" />
+      <End Role="UserDetail" EntitySet="UserDetail" />
+    </AssociationSet>
+    <AssociationSet Name="userid" Association="Database1Model.Store.userid">
+      <End Role="UserM" EntitySet="UserM" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="aid" />
+    </Key>
+    <Property Name="aid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="datetime" Type="datetime" />
+    <Property Name="phoneno" Type="varchar" MaxLength="10" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="sid" Type="int" Nullable="false" />
+    <Property Name="userid" Type="int" />
+    <Property Name="sp_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="cid" />
+    </Key>
+    <Property Name="cid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="50" />
+    <Property Name="createdBy" Type="varchar" MaxLength="50" />
+    <Property Name="createdDate" Type="date" />
+    <Property Name="cimage" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ServiceProvider">
+    <Key>
+      <PropertyRef Name="spid" />
+    </Key>
+    <Property Name="spid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="location" Type="varchar" MaxLength="50" />
+    <Property Name="companyName" Type="varchar" MaxLength="50" />
+    <Property Name="address" Type="varchar" MaxLength="100" />
+    <Property Name="phoneno" Type="varchar" MaxLength="10" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="faxNo" Type="varchar" MaxLength="50" />
+    <Property Name="panNo" Type="varchar" MaxLength="50" />
+    <Property Name="adhaarNo" Type="varchar" MaxLength="50" />
+    <Property Name="referredBy" Type="varchar" MaxLength="50" />
+    <Property Name="customerPan" Type="varchar" MaxLength="50" />
+    <Property Name="sp_image" Type="varchar" MaxLength="50" />
+    <Property Name="serviceCategory" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="cid" Type="int" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="150" />
+    <Property Name="service_image" Type="varchar" MaxLength="50" />
+    <Property Name="min_cost" Type="varchar" MaxLength="50" />
+    <Property Name="pinCode" Type="int" />
+  </EntityType>
+  <EntityType Name="SPS">
+    <Key>
+      <PropertyRef Name="spid" />
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="spid" Type="int" Nullable="false" />
+    <Property Name="sid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="phoneno" />
+    </Key>
+    <Property Name="phoneno" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="uid" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="address" Type="varchar" MaxLength="100" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="panNo" Type="varchar" MaxLength="50" />
+    <Property Name="companyName" Type="varchar" MaxLength="50" />
+    <Property Name="pinCode" Type="int" />
+  </EntityType>
+  <EntityType Name="UserM">
+    <Key>
+      <PropertyRef Name="uid" />
+    </Key>
+    <Property Name="uid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="role" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="cid">
+    <End Role="Category" Type="Database1Model.Store.Category" Multiplicity="1" />
+    <End Role="Services" Type="Database1Model.Store.Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="cid" />
+      </Principal>
+      <Dependent Role="Services">
+        <PropertyRef Name="cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="sid">
+    <End Role="Services" Type="Database1Model.Store.Services" Multiplicity="1" />
+    <End Role="Appointment" Type="Database1Model.Store.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="sp_id">
+    <End Role="ServiceProvider" Type="Database1Model.Store.ServiceProvider" Multiplicity="0..1" />
+    <End Role="Appointment" Type="Database1Model.Store.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceProvider">
+        <PropertyRef Name="spid" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="sp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="u_id">
+    <End Role="UserM" Type="Database1Model.Store.UserM" Multiplicity="1" />
+    <End Role="ServiceProvider" Type="Database1Model.Store.ServiceProvider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserM">
+        <PropertyRef Name="uid" />
+      </Principal>
+      <Dependent Role="ServiceProvider">
+        <PropertyRef Name="u_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="uid">
+    <End Role="UserM" Type="Database1Model.Store.UserM" Multiplicity="0..1" />
+    <End Role="UserDetail" Type="Database1Model.Store.UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserM">
+        <PropertyRef Name="uid" />
+      </Principal>
+      <Dependent Role="UserDetail">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="userid">
+    <End Role="UserM" Type="Database1Model.Store.UserM" Multiplicity="0..1" />
+    <End Role="Appointment" Type="Database1Model.Store.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserM">
+        <PropertyRef Name="uid" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
